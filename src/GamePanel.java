@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	boolean running = false;
 	Timer timer;
 	Random random;
+	static boolean gameOn = false; 
 	
 	public GamePanel(){
 		random = new Random();
@@ -70,6 +71,9 @@ public class GamePanel extends JPanel implements ActionListener{
 			g.setFont(new Font("Ink Free", Font.BOLD, 40));
 			FontMetrics metrics = getFontMetrics(g.getFont());
 			g.drawString("Score " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score " + applesEaten))/2, g.getFont().getSize());
+			
+			
+			
 		} else {
 			gameOver(g);
 		}
@@ -159,6 +163,17 @@ public class GamePanel extends JPanel implements ActionListener{
 		g.drawString("Press Space To RESTART!", (SCREEN_WIDTH - metrics3.stringWidth("Press Space To RESTART!"))/2, 400);
 	}
 	
+	public void pauseGame() {
+		running = false;
+		timer.stop();
+		
+		
+	}
+	
+	public void resumeGame() {
+		running = true;
+		timer.start();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -200,7 +215,14 @@ public class GamePanel extends JPanel implements ActionListener{
 					new GameFrame();
 				}
 				break;
+			case KeyEvent.VK_P:
+				if (running) {
+					pauseGame();
+				} else {
+					resumeGame();
+				}
 			}
+				
 		}
 	}
 
