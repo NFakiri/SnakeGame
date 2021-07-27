@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	public void checkApple() {
-		if ((x[0] == appleX) && 	(y[0] == appleY)) {
+		if ((x[0] == appleX) && (y[0] == appleY)) {
 			bodyParts++;
 			applesEaten++;
 			newApple();
@@ -148,11 +148,15 @@ public class GamePanel extends JPanel implements ActionListener{
 		g.drawString("Score " + applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score " + applesEaten))/2, g.getFont().getSize());
 		
 		// Game Over text
-		
 		g.setColor(Color.red);
 		g.setFont(new Font("Ink Free", Font.BOLD, 75));
 		FontMetrics metrics2 = getFontMetrics(g.getFont());
 		g.drawString("Game Over!", (SCREEN_WIDTH - metrics2.stringWidth("Game Over!"))/2, SCREEN_HEIGHT/2);
+		
+		g.setColor(Color.red);
+		g.setFont(new Font("arial", Font.BOLD, 20));
+		FontMetrics metrics3 = getFontMetrics(g.getFont());
+		g.drawString("Press Space To RESTART!", (SCREEN_WIDTH - metrics3.stringWidth("Press Space To RESTART!"))/2, 400);
 	}
 	
 	
@@ -189,6 +193,11 @@ public class GamePanel extends JPanel implements ActionListener{
 			case KeyEvent.VK_DOWN:
 				if (direction != 'U') {
 					direction = 'D';
+				}
+				break;
+			case KeyEvent.VK_SPACE:
+				if (!running) {
+					new GameFrame();
 				}
 				break;
 			}
